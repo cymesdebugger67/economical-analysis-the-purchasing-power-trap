@@ -16,7 +16,7 @@
 | 4. Economic analysis | Passed for statutory-rate measures | Monthly and annual CPI changes, January 2018 cumulative changes, PPP, effective wages, real wages, indexed comparisons, regional benchmark, commodity and timing sensitivities computed. No household scenario is claimed. |
 | 5. Reporting | Initial figures passed | Five figures in `reports/figures/`; headline and commodity tables in `reports/tables/`; notebook reads processed outputs. Visual and interpretation review remains before public release. |
 | 6. Testing and reproducibility | Initial checks passed | Nine offline `unittest` cases, 0 failures. Workspace virtual-environment editable install with existing system packages and offline pipeline run succeeded. Notebook's four code cells passed a non-interactive smoke check. Fresh dependency download in an empty environment remains unverified. |
-| 7. Git release | Local checkpoint passed; public release pending | Core pipeline committed locally as `bb7d12d` on the feature branch. The presentation checkpoint and final Git status are reported with this batch. No push, merge, or publication authorized. |
+| 7. Git release | Local checkpoint passed; public release pending | Core pipeline `bb7d12d` and presentation `55d1980` committed locally on the feature branch. Raw and processed data remain Git-ignored. No push, merge, or publication authorized. |
 
 ## Core findings under review
 
@@ -35,6 +35,7 @@ The Davao all-items CPI was 97.4 in January 2018 and 131.4 in December 2025; the
 
 - `7bb6588` — pre-existing initial repository commit on `main`.
 - `bb7d12d` — validated official-data pipeline, method, provenance, wage transcription, and tests on `feature/purchasing_power_analysis`.
+- `55d1980` — README, notebook, five figures, summary tables, and the milestone record on the feature branch.
 
 ## Issues and next actions
 

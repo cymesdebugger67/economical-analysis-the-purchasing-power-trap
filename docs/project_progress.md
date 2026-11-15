@@ -37,6 +37,8 @@ The Davao all-items CPI was 97.4 in January 2018 and 131.4 in December 2025; the
 - `bb7d12d` — validated official-data pipeline, method, provenance, wage transcription, and tests on `feature/purchasing_power_analysis`.
 - `55d1980` — README, notebook, five figures, summary tables, and the milestone record on the feature branch.
 
+The final packaging review removed an unused optional test dependency. The current commit hash and clean working-tree status are recorded in the batch handoff.
+
 ## Issues and next actions
 
 1. Obtain the 2023 FIES Region XI expenditure-share workbook via an official accessible route and document its preliminary vintage before adding context. No FIES values were guessed.

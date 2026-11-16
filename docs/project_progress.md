@@ -5,7 +5,7 @@
 **Repository:** `economical-analysis-the-purchasing-power-trap`
 **Development branch from uploaded archive:** `feature/purchasing_power_analysis`
 **Last committed source baseline in archive:** `434f60a`
-**Current stage:** Technical completion of the local source package; owner-controlled Git publication remains pending.
+**Current stage:** Local implementation completed, committed, and technically verified. Final visual approval, source-use review, and GitHub publication remain pending.
 
 This record differentiates validated local code from GitHub publication. The uploaded archive included uncommitted work in progress. The continuation preserves those changes; replacing files from the handoff does **not** automatically create a commit, merge or push.
 
@@ -17,8 +17,8 @@ This record differentiates validated local code from GitHub publication. The upl
 | 3 — Preparation and data QA | **Passed in local replay** | Full monthly coverage, no missing/duplicate monthly keys; FIES category, unit and weighted-share consistency checks pass; audit reconciles eight wage events. |
 | 4 — Economic analysis | **Passed for selected metrics** | Endpoint real-wage gain +11.19%, seven below-reference months, maximum prior-peak drawdown −11.33%, category and timing sensitivities, FIES descriptive decile comparisons. |
 | 5 — Figures and narrative | **Completed locally; owner visual signoff pending** | Eight individual output charts, one review contact sheet, project banner, notebook and revised portfolio README. |
-| 6 — Reproducibility/testing | **Conditional** | 28/28 offline tests passed on Python 3.13.5; both captured and frozen pipeline paths completed with matching headline values; notebook code executed from root and notebook folder. A fresh isolated pip installation could not be completed because this container cannot reach the Python package index. A previously installed Python 3.9 Windows virtual environment is in the uploaded archive but was not executable in the Linux review environment. |
-| 7 — Release preparation | **Pending owner approval** | Final Git review on the user's local machine, check publication rights and downloaded-source exclusions, fresh install check with internet access, review figure images, then controlled feature-branch commit/push and merge if approved. |
+| 6 — Reproducibility/testing | **Passed** | Fresh Windows Python 3.9 virtual-environment installation, editable package installation, dependency checks, frozen-data execution, and all 28 automated tests passed. Release verification also passed in both the original and fresh Python environments. Historical observations and headline metrics reproduced successfully. |
+| 7 — Release preparation | **Technical preparation passed; publication pending** | Local implementation committed at `0627b18`; working tree clean. Final owner visual approval, publication and attribution review, and controlled GitHub feature-branch push and merge remain outstanding. |
 
 ## Original feature-branch history
 
@@ -27,6 +27,36 @@ This record differentiates validated local code from GitHub publication. The upl
 - `55d1980` — README, initial notebook, five figures and summary tables.
 - `4ae4229` — local milestone reference updates.
 - `434f60a` — packaging/dependency cleanup.
+
+### Post-handoff implementation milestone
+
+- `0627b18` — completed: purchasing power & reproducible analysis reporting.
+
+This local feature-branch commit contains the completed analytical implementation, official-data frozen snapshots, wage-order audit, FIES expenditure analysis, updated methodology, portfolio README, visualizations, notebooks, release-verification utilities, and expanded automated tests.
+
+**Git status at verification:** Clean working tree on `feature/purchasing_power_analysis`.
+
+**Publication status:** Committed locally. Feature-branch push and merge into `main` remain pending.
+
+### Fresh-environment verification — 16 November 2026
+
+A fresh Windows Python 3.9 virtual environment was created to validate project reproducibility independently of the original development environment.
+
+Verified results:
+
+- pip 26.0.1 and updated packaging tools installed successfully.
+- Editable installation using `pip install -e .` succeeded.
+- Dependency validation using `pip check` reported no broken requirements.
+- Frozen-source analysis completed successfully.
+- All 28 automated tests passed with zero failures.
+- Release verification passed in both the fresh environment and the original project environment.
+- The verification confirmed 768 CPI, 192 purchasing-power, and 176 FIES observations.
+- All nine figure files and 19 README links passed automated release checks.
+- The real statutory-wage endpoint change reproduced at approximately +11.19%.
+
+The fresh-environment installation and execution requirement is therefore **PASSED**, not pending.
+
+Figure-rendering differences caused by the newer plotting environment were reverted to the previously committed versions. The working tree was confirmed clean afterward.
 
 The original `origin/main` shown in the archive remains at `7bb6588`. **Do not assume this local archive proves the live remote is unchanged.** Run `git fetch origin` before publishing.
 
@@ -61,11 +91,32 @@ The uploaded ZIP contained the original `.git` folder, `.venv` and `.venv_clean`
 
 ## Final owner-controlled gate
 
-1. Apply the supplied **overlay archive into the existing Git checkout**, leaving `.git` and local environments untouched.
-2. Run the frozen pipeline, unit tests, and release verification script in a new local venv with actual package-index access.
-3. Review the eight charts and banner, confirm numeric summaries and author name.
-4. Check `git status`, `git diff --check`, `git diff --stat`, `git ls-files data/raw` and `.gitignore` before committing.
-5. Stage only reviewed sources, normalized tracked snapshots, documented output tables and charts. Do not commit ignored original raw PDFs/API payloads or virtual environments.
-6. Create a single or small number of coherent commits on the feature branch, push only after approval, and review GitHub rendering before any merge to `main`.
+### Completed
+
+- [x] Apply the completed project overlay to the existing Git repository.
+- [x] Preserve the existing Git history and development feature branch.
+- [x] Execute the frozen-source analytical pipeline.
+- [x] Validate CPI, purchasing-power, FIES, and wage-event observations.
+- [x] Pass all 28 automated tests.
+- [x] Complete an isolated Python 3.9 environment installation.
+- [x] Verify installed package dependencies.
+- [x] Pass the release-verification script in both Python environments.
+- [x] Commit the completed implementation locally as `0627b18`.
+- [x] Restore generated figure changes and confirm a clean Git working tree.
+
+### Pending before publication
+
+- [ ] Obtain owner approval of the project banner and all eight analytical charts.
+- [ ] Complete the final public-facing README and notebook review.
+- [ ] Confirm source attribution, permitted publication of frozen official-data extracts, and applicable licensing conditions.
+- [ ] Verify that no credentials, sensitive information, virtual environments, or prohibited source files are tracked.
+- [ ] Commit the final documentation updates.
+- [ ] Fetch the latest GitHub remote state and confirm the branch is safe to publish.
+- [ ] Push the reviewed feature branch to GitHub with owner approval.
+- [ ] Review the rendered GitHub README, figures, links, and files.
+- [ ] Merge the approved feature branch into `main`.
+- [ ] Verify the final GitHub repository and record the release commit.
+
+**Publication status:** Pending owner approval. No feature-branch push or merge has been performed as part of this review.
 
 Detailed commands are in [release checklist](release_checklist.md).

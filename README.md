@@ -75,7 +75,7 @@ The analysis is descriptive. It does not estimate causal wage effects, complianc
 
 The repository contains **small, source-attributed frozen input snapshots** under `data/frozen/`, with a verified SHA-256 manifest. These enable results to be reproduced in a fresh clone even when live PSA APIs or the NWPC website are unavailable. Downloaded raw documents and responses remain ignored under `data/raw/`.
 
-Use Python **3.9 or newer** with compatible dependencies. The previous development report recorded a successful Python 3.9.1 environment; the recovered pipeline was independently tested with Python 3.13.5. A new isolated installation remains unverified because the review environment cannot reach the package index. See the [progress record](docs/project_progress.md).
+Use Python **3.9 or newer** with compatible dependencies. The project has been successfully tested in a fresh Windows Python 3.9 virtual environment using pandas 2.3.3, NumPy 2.0.2, Matplotlib 3.9.4, and Requests 2.32.5. The editable installation, dependency verification, frozen-data pipeline, all 28 automated tests, and release verification passed. The analytical results were reproduced from the checksum-verified frozen datasets. See the [progress record](docs/project_progress.md).
 
 ```powershell
 cd "E:\Machine Learning\The Purchasing Power Trap"

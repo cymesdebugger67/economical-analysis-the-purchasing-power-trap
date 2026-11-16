@@ -79,6 +79,9 @@ Use Python **3.9 or newer** with compatible dependencies. The project has been s
 
 ```powershell
 cd "E:\Machine Learning\The Purchasing Power Trap"
+git clone https://github.com/cymesdebugger67/economical-analysis-the-purchasing-power-trap.git
+cd economical-analysis-the-purchasing-power-trap
+
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --upgrade pip setuptools
 .\.venv\Scripts\python.exe -m pip install -e .

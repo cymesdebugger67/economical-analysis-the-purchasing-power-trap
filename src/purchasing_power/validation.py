@@ -1,5 +1,7 @@
 import pandas as pd
 
+from purchasing_power.sources import WAGE_ORDER_URLS
+
 
 START_MONTH = pd.Timestamp("2018-01-01")
 END_MONTH = pd.Timestamp("2025-12-01")
@@ -44,6 +46,34 @@ def validate_wage_events(events: pd.DataFrame) -> dict:
             "last_effective_date": str(events["effective_date"].iloc[-1].date()),
             "minimum_wage_php": float(events["daily_wage_php"].min()),
             "maximum_wage_php": float(events["daily_wage_php"].max())}
+
+
+def validate_wage_event_audit(events: pd.DataFrame, audit: pd.DataFrame) -> dict:
+    required = {"effective_date", "wage_order", "prior_rate_php", "new_rate_php", "increase_php",
+                "original_order_url", "order_page", "verification_status"}
+    if set(audit) != required or len(audit) != len(events):
+        raise ValueError("Wage audit schema or event count does not match")
+    if audit.isna().any().any() or audit["effective_date"].duplicated().any():
+        raise ValueError("Wage audit contains missing or duplicate events")
+    merged = events.merge(audit, on="effective_date", how="outer", validate="one_to_one", indicator=True)
+    if not merged["_merge"].eq("both").all():
+        raise ValueError("Wage audit and event dates differ")
+    if not (merged["wage_order_x"].str.replace("XI-", "") ==
+            merged["wage_order_y"].str.replace("RB XI-", "")).all():
+        raise ValueError("Wage audit order identifiers differ")
+    if not (merged["daily_wage_php"] == merged["new_rate_php"]).all():
+        raise ValueError("Wage audit rates differ")
+    if not ((merged["new_rate_php"] - merged["prior_rate_php"]) == merged["increase_php"]).all():
+        raise ValueError("Wage audit increases do not reconcile")
+    if not (merged["prior_rate_php"].iloc[1:].reset_index(drop=True) ==
+            merged["new_rate_php"].iloc[:-1].reset_index(drop=True)).all():
+        raise ValueError("Wage audit rate sequence has a gap")
+    if not all(row.original_order_url == WAGE_ORDER_URLS[row.wage_order_y.split("-")[-1]]
+               for row in merged.itertuples(index=False)):
+        raise ValueError("Wage audit source URL differs from official order index")
+    if not merged["verification_status"].eq("verified_original_order_and_nwpc_schedule").all():
+        raise ValueError("Wage audit contains an unverified event")
+    return {"events_reconciled": len(merged), "rate_gaps": 0, "source_url_mismatches": 0}
 
 
 def validate_base_year(cpi: pd.DataFrame, tolerance: float = 0.05) -> dict:

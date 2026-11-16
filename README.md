@@ -1,65 +1,114 @@
 # The Purchasing Power Trap
 
-**Cyril James Lunzaga** · Economic data analytics · Davao Region, Philippines · January 2018–December 2025
+![The Purchasing Power Trap project banner](assets/purchasing_power_banner.png)
 
-> Did statutory minimum-wage increases preserve purchasing power as consumer prices rose? “Trap” is the research question, not a presumed finding.
+**Cyril James Lunzaga**
+Economic data analytics · Davao Region, Philippines · January 2018–December 2025
 
-## Executive summary
+> **Research question:** Did the statutory minimum wage keep pace with prices, and what does household expenditure composition reveal about the uneven importance of essential costs?
 
-The Region XI non-agricultural statutory daily minimum wage rose from **₱340** in January 2018 to **₱510** in December 2025. Davao's all-items CPI rose from **97.4** to **131.4** (2018=100). Deflating the wage by that CPI gives **₱349.08** and **₱388.13** in 2018 pesos, an **11.19% increase** relative to January 2018. The endpoint comparison does not show a sustained statutory-rate purchasing-power loss. Seven individual months were below the January 2018 real-wage benchmark; the lowest was July 2018 at **2.89% below** it. These are legal-rate comparisons, not measured worker income or household welfare.
+*The banner is conceptual artwork, not a chart of measured results. All figures below are computed from official observations.*
 
-![Davao and national consumer price indices](reports/figures/regional_and_national_cpi.png)
+## Executive finding
 
-## Research question and evidence
+**The endpoint does not show a decline in the purchasing power of the selected statutory wage benchmark.** Region XI's selected non-agricultural daily minimum-wage rate increased by **50.00%** between January 2018 and December 2025, while regional all-items CPI increased by **34.91%**. The resulting real daily wage increased **11.19%** in constant 2018 pesos. This does **not** establish that actual employees or households experienced a comparable gain.
 
-How do effective-dated wage increases compare with monthly consumer prices, and how does the answer change under a food price deflator? The project uses one consistent PSA 2018-base new-geographic-code CPI series for Davao Region and the Philippines; the national series is a price benchmark only.
+| Measure | January 2018 | December 2025 | Endpoint change |
+| --- | ---: | ---: | ---: |
+| Selected statutory non-agricultural wage | ₱340/day | ₱510/day | +50.00% |
+| Davao Region all-items CPI (2018=100) | 97.4 | 131.4 | +34.91% |
+| Statutory real wage (2018 PHP/day) | ₱349.08 | ₱388.13 | **+11.19%** |
+| Food-deflated statutory real wage (2018 PHP/day) | ₱348.00 | ₱380.60 | +9.37% |
 
-- [PSA OpenSTAT CPI](https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2M/PI/CPI/2018NEW/0012M4ACP22.px): 768 monthly observations, two geographies and four top-level groups (all items, food and non-alcoholic beverages, housing and utilities, transport), each complete for 96 months.
-- [PSA purchasing power of the peso](https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2M/PI/CPI/2018NEW/0012M4ACP24.px): 192 observations used to reconcile `100/CPI` against the published rounded series.
-- [NWPC historical non-agricultural wage schedule](https://nwpc.dole.gov.ph/summary-of-daily-minimum-wage-rates-per-wage-order-by-region-non-agriculture-1989-present/): eight Region XI effective rates, including the May 2017 baseline. The [Region XI wage-order index](https://nwpc.dole.gov.ph/region-xi/) provides original-order links.
+The **2018 CPI base** is the full-year 2018 average; **January 2018=100** is a separate indexing convention used in selected charts.
 
-The [PSA 2023 FIES expenditure-share table](https://psa.gov.ph/statistics/income-expenditure/fies/node/1684064928) is identified as secondary context. Its official workbook returned HTTP 403 during this batch; no household expenditure proportions enter the findings. Exact extraction details, vintage caveats, and file hashes are in [data sources](docs/data_sources.md).
+![Wage adjustments compared with regional prices](reports/figures/indexed_wage_and_prices.png)
 
-## Analytical method
+## Why the endpoint is not the whole story
 
-The main monthly measure uses the statutory rate effective on the month's last calendar day. A calendar-day-weighted rate checks sensitivity to mid-month changes. The pipeline calculates month-on-month and year-on-year CPI changes, cumulative change from January 2018, purchasing power of one peso, and indexed wage and CPI trajectories.
+The real-wage series fell below its January 2018 reference in **seven months**, split across three episodes; the longest lasted **four months** (April–July 2018). The lowest month relative to that initial reference was **July 2018, at −2.89%**. Separately, the largest decline from a *previous observed monthly peak* was **−11.33%**, from March 2019 to May 2022. These reference points answer different questions and should not be conflated.
 
-`real statutory daily wage in 2018 PHP = nominal statutory daily wage × 100 / CPI`
+![Monthly real statutory wages and the reference threshold](reports/figures/real_wage_below_reference.png)
 
-The wage and price indices both use January 2018=100 for comparison. The official **2018 CPI base** is the annual average, so January 2018 CPI need not equal 100. Food CPI is an alternative deflator, not a worker-specific basket. [Methodology](docs/methodology.md) records assumptions, formulas, and limitations.
+The wage schedule uses the **rate legally in force at month end**. A separate calendar-day-weighted series tests how the treatment of mid-month wage changes affects monthly estimates. For June 2022, this yields **₱427** at month end versus **₱408.40** as a calendar-day average. Neither convention measures actual paid days.
 
-![Nominal and real statutory daily wages](reports/figures/nominal_and_real_statutory_wages.png)
+## Income-decile context: 2023 FIES
 
-![Indexed statutory wage and regional CPI](reports/figures/indexed_wage_and_prices.png)
+The official [2023 PSA Family Income and Expenditure Survey Table 7](https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__1E__IE/0071E3ATME0.px) provides spending composition for families grouped by *per-capita income decile*. In Davao Region, food and non-alcoholic beverages accounted for **58.3%** of total family expenditure in the first decile, compared with **23.9%** in the tenth decile: a **34.4-percentage-point** difference. Food, housing/utilities, and transport combined represented **79.8%** in the first decile and **57.5%** in the tenth.
 
-## Findings and robustness
+![Income-decile expenditure composition](reports/figures/fies_expenditure_shares_by_decile.png)
 
-Davao all-items prices increased **34.91%** between the endpoints; the comparable national index increased **33.74%**. Davao food CPI reached **134.0** in December 2025, compared with **131.4** for all items. The food-deflated December 2025 wage is **₱380.60** in 2018 pesos, **9.37% above** its own January 2018 baseline. The largest within-month timing difference is June 2022: **₱427** at month end versus a **₱408.40** calendar-day-weighted rate. That sensitivity is not an estimate of paid working days.
+![Davao and national food expenditure shares](reports/figures/fies_food_share_davao_vs_philippines.png)
 
-![Selected essential-category CPIs](reports/figures/essential_commodity_cpi.png)
+These are **2023 cross-sectional survey expenditure shares**, not observed individual purchasing power, worker incomes, monthly spending, or household-specific inflation. They provide distributional context; they are **not merged into** the 2018–2025 wage/CPI series or used to construct an unsupported custom CPI.
 
-![Timing and deflator sensitivity](reports/figures/wage_sensitivity_comparison.png)
+## Study design and sources
 
-The five figures use validated official observations. Local monthly outputs are in `data/processed/`; published summary tables and validation diagnostics are in `reports/tables/`.
+The study joins Region XI statutory wage-order events to the **96 monthly dates** from January 2018 to December 2025, then deflates the legal wage benchmark using PSA monthly CPI. The Philippines is included as a **price comparator**, not a national wage comparison. Additional groups are food and non-alcoholic beverages, housing and utilities, and transport.
 
-## Reproduce
+| Official source | Role | Captured coverage |
+| --- | --- | --- |
+| [PSA OpenSTAT 2018-base CPI](https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2M/PI/CPI/2018NEW/0012M4ACP22.px) | Prices and category comparisons | 768 observations: two geographies × four categories × 96 months |
+| [PSA purchasing power of the peso](https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2M/PI/CPI/2018NEW/0012M4ACP24.px) | Independent rounded-value check on `100 / CPI` | 192 observations |
+| [NWPC historical wage schedule](https://nwpc.dole.gov.ph/summary-of-daily-minimum-wage-rates-per-wage-order-by-region-non-agriculture-1989-present/) and [Region XI original orders](https://nwpc.dole.gov.ph/region-xi/) | Effective-dated statutory wage benchmark | Eight events, original orders XI-19 through XI-23 audited |
+| [PSA FIES Table 7](https://openstat.psa.gov.ph/PXWeb/pxweb/en/DB/DB__1E__IE/0071E3ATME0.px) | 2023 family expenditure composition | 176 values, two geographies × eleven income groups × eight selected categories |
 
-Python **3.9 or newer** is required. The verified local environment used Python 3.9.1, pandas 1.5.3, matplotlib 3.7.1, and requests 2.28.2. From the repository root, use a workspace virtual environment:
+Historical order XI-19's **₱340** rate includes COLA; the larger-establishment benchmark had different treatment from small retail/service establishments before the wage schedule converged in April 2023. The study does not claim that every non-agricultural worker received the plotted rate. The study endpoint is **December 2025**; subsequent 2026 wage orders are intentionally outside scope.
+
+See [data sources and attribution](docs/data_sources.md), [wage-order audit](docs/wage_order_audit.md), and [methodology](docs/methodology.md) for definitions, original links, checksums, eligibility notes, and limitations.
+
+## Measures and quality assurance
+
+The primary metric is:
+
+\[
+\text{Real statutory wage}_{t,2018\text{ PHP}} = \text{Nominal statutory wage}_t\,\frac{100}{\text{CPI}_t}.
+\]
+
+The pipeline also calculates month-on-month and year-over-year CPI changes, cumulative inflation from January 2018, `100 / CPI`, indexed nominal wages and prices, below-baseline episodes, peak-to-trough drawdown, wage-event windows, food-deflator sensitivity, and the nominal/price ratio decomposition.
+
+Quality controls cover **completeness, accuracy, consistency, integrity, and validation**: full 96-month coverage, missing/duplicate keys, positive numerical values, CPI 2018-base checks, wage effective-date and audit reconciliation, source SHA-256 checks, FIES category/decile coverage, FIES expenditure totals and weighted-share reconciliation, and official PPP rounding. The captured extract shows **zero missing or duplicate monthly keys**; maximum PPP discrepancy is **₱0.00498** within the **₱0.006** tolerance. See [the reproducible evidence record](docs/project_progress.md).
+
+The analysis is descriptive. It does not estimate causal wage effects, compliance, working days actually paid, employment, poverty, or household-specific cost-of-living exposure. No synthetic values are used as research observations.
+
+## Reproduce the analysis
+
+The repository contains **small, source-attributed frozen input snapshots** under `data/frozen/`, with a verified SHA-256 manifest. These enable results to be reproduced in a fresh clone even when live PSA APIs or the NWPC website are unavailable. Downloaded raw documents and responses remain ignored under `data/raw/`.
+
+Use Python **3.9 or newer** with compatible dependencies. The previous development report recorded a successful Python 3.9.1 environment; the recovered pipeline was independently tested with Python 3.13.5. A new isolated installation remains unverified because the review environment cannot reach the package index. See the [progress record](docs/project_progress.md).
 
 ```powershell
+cd "E:\Machine Learning\The Purchasing Power Trap"
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install --upgrade pip setuptools
 .\.venv\Scripts\python.exe -m pip install -e .
-.\.venv\Scripts\python.exe scripts/run_analysis.py --acquire
+.\.venv\Scripts\python.exe scripts/run_analysis.py --source frozen
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-`--acquire` downloads the narrow PSA API extracts and NWPC PDF, validates them, and regenerates tables and figures. Omit it for an offline rerun if the original `data/raw/` directory remains available. PSA may revise its live tables; compare refreshed raw-file hashes with [the recorded vintage](docs/data_sources.md). Raw downloads and processed monthly datasets are Git-ignored. Synthetic values occur only in offline tests. The [notebook](notebooks/purchasing_power_analysis.ipynb) reads the same validated outputs.
+To rerun against the **original locally captured vintage**, use `python scripts/run_analysis.py --source captured` if your ignored `data/raw/` files are still available. To acquire into a **new, timestamped vintage**, use `python scripts/run_analysis.py --refresh-vintage` with network access. A live refresh is **not** automatically equivalent to the frozen baseline; compare metadata and hashes before updating any findings. `--acquire` is for an empty `data/raw/` and deliberately refuses to overwrite a captured vintage. `python scripts/create_frozen_inputs.py` rebuilds snapshots from verified captured files, but refuses to overwrite the checked-in baseline without an explicit `--replace`.
 
-The pipeline rejects duplicate or missing keys, invalid CPI values, wage coverage gaps, failed joins, an inconsistent 2018 base, and PPP disagreement. The recorded extract has **zero missing or duplicate keys**; maximum PPP difference is **0.00498 peso**, within a 0.006-peso tolerance. Nine offline tests pass in a workspace environment using existing installed dependencies. A fresh dependency download in an empty environment remains to be verified. [Progress and acceptance evidence](docs/project_progress.md) records the review status.
+The notebook [`notebooks/purchasing_power_analysis.ipynb`](notebooks/purchasing_power_analysis.ipynb) reads validated pipeline outputs and adds interpretation. Other charts, source checks, and reports are located in [`reports/figures/`](reports/figures/) and [`reports/tables/`](reports/tables/).
 
-## Limits and next review
+## Project structure
 
-The wage measure is a legal benchmark that can differ from actual pay or eligibility. CPI is a representative index, not a family's spending record. The findings are descriptive and do not identify a causal wage-to-price effect. FIES context, original-order exemption review, a final publication check, and visual design remain before release.
+```text
+assets/                  Project banner
+src/purchasing_power/    Source extraction, validations, analysis, visualization, frozen-data loading
+scripts/                 Pipeline execution and frozen-data snapshot builder
+data/frozen/             Source-attributed selected observations and checksum manifest
+data/reference/          Effective-dated wage benchmark and original-order event audit
+data/raw/                Ignored captured source responses and original PDFs (optional)
+data/processed/          Ignored generated monthly analytical tables
+reports/figures/         Publication figures and QA contact sheet
+reports/tables/          Publication-ready summary and validation tables
+notebooks/               Notebook analytical walkthrough
+docs/                    Methods, sources, evidence, wage legal scope
+tests/                  Offline unit and integration-contract tests
+```
 
-`src/purchasing_power/` contains acquisition, preparation, validation, analysis, and plotting. `scripts/run_analysis.py` runs the pipeline; `data/reference/` holds the source-linked wage transcription; `reports/` holds reviewed outputs; `docs/` records provenance and decisions; `tests/` contains offline arithmetic and failure tests.
+## Interpretation and conclusion
+
+For the *selected statutory benchmark*, the endpoint evidence rejects a simple narrative of uninterrupted real-wage erosion: the series ends **11.19%** above its January 2018 real level. Still, temporary erosion episodes and the **−11.33% peak-to-trough drawdown** show that outcomes depend on *when* the comparison is made. The FIES context independently shows a much larger food expenditure share among lower-income-decile families. Neither finding establishes an individual worker's living standard or a household-level cost-of-living index. The defensible result is an **endpoint gain with meaningful temporal volatility and heterogeneous expenditure priorities**, not a universal purchasing-power trap.
+
+**Author:** Cyril James Lunzaga

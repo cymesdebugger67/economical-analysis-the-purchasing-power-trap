@@ -1,4 +1,16 @@
 {
+  "reproduction_mode": "frozen",
+  "source_hashes": {
+    "cpi": "f7614ce465007af54294e988a938f89fc9556ee986f413416a9c57477096880c",
+    "ppp": "23beef70e1ef665428a9e431863b25da13753daf49ff4d77baf9438c97cf3e96",
+    "fies": "dc64c218cc9369a270b79a151c9df837722ad5ca6810389462ae4b362bb502d7"
+  },
+  "frozen_input_hashes": {
+    "cpi": "0c450160b4df4129eb1e250d6f0f3542f797640692e4d42c4b14c2386ecf746c",
+    "ppp": "6440af03f893dd42cdeb8dfbffdeb75eeff159c20f3aee2d94675f232829c2be",
+    "fies": "a2aae907b40db5943e112ee8ee07935b3146178d80edbf9100b79ff12ef3170b"
+  },
+  "source_retrieved_on": "2026-11-16",
   "cpi": {
     "rows": 768,
     "groups": 8,
@@ -19,10 +31,15 @@
   },
   "wages": {
     "events": 8,
-    "baseline_date": "2017-05-01",
+    "baseline_date": "2016-12-16",
     "last_effective_date": "2025-03-07",
     "minimum_wage_php": 340.0,
     "maximum_wage_php": 510.0
+  },
+  "wage_event_audit": {
+    "events_reconciled": 8,
+    "rate_gaps": 0,
+    "source_url_mismatches": 0
   },
   "base_year": {
     "series": 8,
@@ -34,9 +51,16 @@
     "maximum_absolute_deviation": 0.004977375565610842,
     "tolerance": 0.006
   },
-  "source_hashes": {
-    "cpi": "f7614ce465007af54294e988a938f89fc9556ee986f413416a9c57477096880c",
-    "ppp": "23beef70e1ef665428a9e431863b25da13753daf49ff4d77baf9438c97cf3e96",
-    "wages": "e29f152c0f7cc6cd741a41a9ac718b44e1f7ec6e741162bbee45f6419e7cd7ac"
+  "fies": {
+    "rows": 176,
+    "geographies": 2,
+    "income_groups_per_geography": 11,
+    "categories_per_group": 8,
+    "missing_values": 0,
+    "duplicate_keys": 0,
+    "share_minimum_percent": 1.3,
+    "share_maximum_percent": 58.3,
+    "maximum_weighted_share_deviation_percentage_points": 0.051794529614023865,
+    "weighted_share_tolerance_percentage_points": 0.15
   }
 }

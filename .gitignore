@@ -1,6 +1,10 @@
-.venv/
+.venv*/
+.vscode/
 __pycache__/
 *.py[cod]
+*.egg-info/
+build/
+dist/
 .pytest_cache/
 .ipynb_checkpoints/
 .env
@@ -9,5 +13,4 @@ __pycache__/
 *.key
 data/raw/
 data/processed/
-!data/raw/.gitkeep
-!data/processed/.gitkeep
+reports/vintages/

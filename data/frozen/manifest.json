@@ -1,0 +1,28 @@
+{
+  "format_version": 1,
+  "provenance": "Selected official observations; normalization checked against captured PSA extracts, not simulated data",
+  "source_retrieved_on": "2026-11-16",
+  "files": {
+    "cpi": {
+      "file": "monthly_cpi_2018_2025.csv",
+      "sha256": "0c450160b4df4129eb1e250d6f0f3542f797640692e4d42c4b14c2386ecf746c",
+      "observations": 768,
+      "official_url": "https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2M/PI/CPI/2018NEW/0012M4ACP22.px",
+      "source_sha256": "f7614ce465007af54294e988a938f89fc9556ee986f413416a9c57477096880c"
+    },
+    "ppp": {
+      "file": "monthly_purchasing_power_2018_2025.csv",
+      "sha256": "6440af03f893dd42cdeb8dfbffdeb75eeff159c20f3aee2d94675f232829c2be",
+      "observations": 192,
+      "official_url": "https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/2M/PI/CPI/2018NEW/0012M4ACP24.px",
+      "source_sha256": "23beef70e1ef665428a9e431863b25da13753daf49ff4d77baf9438c97cf3e96"
+    },
+    "fies": {
+      "file": "fies_expenditure_2023.csv",
+      "sha256": "a2aae907b40db5943e112ee8ee07935b3146178d80edbf9100b79ff12ef3170b",
+      "observations": 176,
+      "official_url": "https://openstat.psa.gov.ph/PXWeb/api/v1/en/DB/1E/IE/0071E3ATME0.px",
+      "source_sha256": "dc64c218cc9369a270b79a151c9df837722ad5ca6810389462ae4b362bb502d7"
+    }
+  }
+}

@@ -1,9 +1,14 @@
 import unittest
+import json
+import tempfile
+from pathlib import Path
 
 import pandas as pd
 
 from purchasing_power.analysis import calculate_cpi_metrics, calculate_wage_metrics, monthly_wage_rates
-from purchasing_power.validation import validate_base_year, validate_monthly_series, validate_ppp_reconciliation
+from purchasing_power.preparation import load_pxweb_records
+from purchasing_power.sources import WAGE_ORDER_URLS
+from purchasing_power.validation import validate_base_year, validate_monthly_series, validate_ppp_reconciliation, validate_wage_event_audit, validate_wage_events
 
 
 class EconomicCalculationsTest(unittest.TestCase):
@@ -84,6 +89,57 @@ class EconomicCalculationsTest(unittest.TestCase):
         frame.loc[0, "cpi"] = 110
         with self.assertRaisesRegex(ValueError, "base-year"):
             validate_base_year(frame)
+
+    def test_annual_base_does_not_require_january_to_equal_100(self):
+        months = pd.date_range("2018-01-01", periods=12, freq="MS")
+        values = [99] + [101] + [100] * 10
+        frame = pd.DataFrame([{"month": month, "geography": geography, "commodity": commodity,
+                               "cpi": value} for geography in ("davao_region", "philippines")
+                              for commodity in ("all_items", "food_and_beverages", "housing_and_utilities", "transport")
+                              for month, value in zip(months, values)])
+        self.assertEqual(validate_base_year(frame)["maximum_absolute_deviation_from_100"], 0)
+
+    def test_nonpositive_cpi_fails(self):
+        months = pd.date_range("2018-01-01", "2025-12-01", freq="MS")
+        frame = pd.DataFrame({"month": months, "geography": "davao_region",
+                              "commodity": "all_items", "cpi": [0] + [100] * 95})
+        with self.assertRaisesRegex(ValueError, "Nonpositive"):
+            validate_monthly_series(frame, ["geography", "commodity"], "cpi", 1)
+
+    def test_wage_event_audit_rejects_rate_mismatch(self):
+        events = pd.DataFrame({"effective_date": pd.to_datetime(["2017-01-01", "2018-08-16"]),
+                               "wage_order": ["XI-19", "XI-20"], "daily_wage_php": [100, 120]})
+        audit = pd.DataFrame({"effective_date": events["effective_date"],
+                              "wage_order": ["RB XI-19", "RB XI-20"],
+                              "prior_rate_php": [90, 100], "new_rate_php": [100, 120],
+                              "increase_php": [10, 20], "original_order_url":
+                              [WAGE_ORDER_URLS["19"], WAGE_ORDER_URLS["20"]],
+                              "order_page": [2, 2],
+                              "verification_status": ["verified_original_order_and_nwpc_schedule"] * 2})
+        self.assertEqual(validate_wage_event_audit(events, audit)["events_reconciled"], 2)
+        audit.loc[1, "new_rate_php"] = 121
+        with self.assertRaisesRegex(ValueError, "rates differ"):
+            validate_wage_event_audit(events, audit)
+
+    def test_duplicate_wage_date_fails(self):
+        events = pd.DataFrame({"effective_date": pd.to_datetime(["2017-01-01", "2017-01-01"]),
+                               "daily_wage_php": [100, 120]})
+        with self.assertRaisesRegex(ValueError, "Duplicate"):
+            validate_wage_events(events)
+
+    def test_frozen_pxweb_record_decodes_deterministically(self):
+        payload = {"metadata": {"variables": [{"code": "Geolocation", "values": ["0"],
+                                               "valueTexts": ["PHILIPPINES"]}]},
+                   "observations": {"columns": [{"code": "Geolocation", "type": "d"},
+                                                {"code": "value", "type": "c"}],
+                                    "data": [{"key": ["0"], "values": ["97.4"]}]}}
+        with tempfile.TemporaryDirectory() as temporary_directory:
+            path = Path(temporary_directory) / "frozen_source.json"
+            path.write_text(json.dumps(payload), encoding="utf-8")
+            first = load_pxweb_records(path)
+            second = load_pxweb_records(path)
+            pd.testing.assert_frame_equal(first, second)
+            self.assertEqual(first.iloc[0]["value"], "97.4")
 
 
 if __name__ == "__main__":

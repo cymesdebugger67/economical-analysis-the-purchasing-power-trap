@@ -1,0 +1,20 @@
+{
+  "months_below_reference": 7,
+  "longest_episode_months": 4,
+  "maximum_drawdown": {
+    "peak_month": "2019-03",
+    "peak_real_wage_2018_php": 389.3805309734513,
+    "trough_month": "2022-05",
+    "trough_real_wage_2018_php": 345.24847428073235,
+    "drawdown_percent": -11.333914559721004
+  },
+  "endpoint_decomposition": {
+    "reference_month": "2018-01",
+    "end_month": "2025-12",
+    "nominal_wage_ratio": 1.5,
+    "regional_price_ratio": 1.3490759753593429,
+    "real_wage_ratio": 1.1118721461187215,
+    "national_price_ratio": 1.337448559670782,
+    "regional_minus_national_cumulative_price_change_percentage_points": 1.162741568856096
+  }
+}

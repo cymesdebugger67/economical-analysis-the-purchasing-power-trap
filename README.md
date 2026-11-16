@@ -78,7 +78,6 @@ The repository contains **small, source-attributed frozen input snapshots** unde
 Use Python **3.9 or newer** with compatible dependencies. The project has been successfully tested in a fresh Windows Python 3.9 virtual environment using pandas 2.3.3, NumPy 2.0.2, Matplotlib 3.9.4, and Requests 2.32.5. The editable installation, dependency verification, frozen-data pipeline, all 28 automated tests, and release verification passed. The analytical results were reproduced from the checksum-verified frozen datasets. See the [progress record](docs/project_progress.md).
 
 ```powershell
-cd "E:\Machine Learning\The Purchasing Power Trap"
 git clone https://github.com/cymesdebugger67/economical-analysis-the-purchasing-power-trap.git
 cd economical-analysis-the-purchasing-power-trap
 

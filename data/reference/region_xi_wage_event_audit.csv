@@ -1,0 +1,9 @@
+effective_date,wage_order,prior_rate_php,new_rate_php,increase_php,original_order_url,order_page,verification_status
+2016-12-16,RB XI-19,317,340,23,https://nwpc.dole.gov.ph/wp-content/uploads/2023/04/reg-11-wo-19.pdf,2,verified_original_order_and_nwpc_schedule
+2018-08-16,RB XI-20,340,370,30,https://nwpc.dole.gov.ph/wp-content/uploads/2024/11/reg-11-wo-20.pdf,2,verified_original_order_and_nwpc_schedule
+2019-02-16,RB XI-20,370,396,26,https://nwpc.dole.gov.ph/wp-content/uploads/2024/11/reg-11-wo-20.pdf,2,verified_original_order_and_nwpc_schedule
+2022-06-19,RB XI-21,396,427,31,https://nwpc.dole.gov.ph/wp-content/uploads/2023/04/Published-WO-No.-RB-XI-21.pdf,2-3,verified_original_order_and_nwpc_schedule
+2023-01-01,RB XI-21,427,443,16,https://nwpc.dole.gov.ph/wp-content/uploads/2023/04/Published-WO-No.-RB-XI-21.pdf,2,verified_original_order_and_nwpc_schedule
+2024-03-06,RB XI-22,443,462,19,https://nwpc.dole.gov.ph/wp-content/uploads/2024/02/Wage-Order-No.-RB-XI-22.pdf,2-3,verified_original_order_and_nwpc_schedule
+2024-09-01,RB XI-22,462,481,19,https://nwpc.dole.gov.ph/wp-content/uploads/2024/02/Wage-Order-No.-RB-XI-22.pdf,2,verified_original_order_and_nwpc_schedule
+2025-03-07,RB XI-23,481,510,29,https://nwpc.dole.gov.ph/wp-content/uploads/2025/02/Wage-Order-No.-RB-XI-23.pdf,2,verified_original_order_and_nwpc_schedule
